@@ -72,9 +72,10 @@ jobs:
         run: |
           mkdir -p ./artifact/package
           mkdir -p ./artifact/buildinfo
-          rm -rf $(find ./bin/targets/ -type d -name "packages")
+          mkdir -p ./artifact/kmods
           cp -rf $(find ./bin/packages/ -type f -name "*.ipk") ./artifact/package/
           cp -rf $(find ./bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
+          cp -rf $(find ./bin/targets/ -type f -name "*.ipk") ./artifact/kmods/
 
       - name: Upload buildinfo
         uses: actions/upload-artifact@v3
@@ -93,3 +94,9 @@ jobs:
         with:
           name: OpenWrt_firmware
           path: ./bin/targets/
+
+      - name: Upload kmods
+        uses: actions/upload-artifact@v3
+        with:
+          name: OpenWrt_kmods
+          path: ./artifact/kmods/
