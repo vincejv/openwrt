@@ -132,9 +132,9 @@ Signed-off-by: Lee Jackson <info@arducam.com>
 +...
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -17553,6 +17553,14 @@ F:	Documentation/devicetree/bindings/med
- F:	Documentation/devicetree/bindings/media/i2c/imx477.yaml
- F:	drivers/media/i2c/imx477.c
+@@ -19330,6 +19330,14 @@ T:	git git://linuxtv.org/media_tree.git
+ F:	Documentation/devicetree/bindings/media/i2c/imx519.yaml
+ F:	drivers/media/i2c/imx519.c
  
 +SONY IMX519 SENSOR DRIVER
 +M:	Arducam Kernel Maintenance <info@arducam.com>
