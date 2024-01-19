@@ -1,7 +1,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=qca-ssdk
-PKG_RELEASE:=2
+PKG_RELEASE:=4
 
 PKG_SOURCE_URL:=https://git.codelinaro.org/clo/qsdk/oss/lklm/qca-ssdk.git
 PKG_SOURCE_PROTO:=git
@@ -20,7 +20,7 @@ define KernelPackage/qca-ssdk
   CATEGORY:=Kernel modules
   SUBMENU:=Network Devices
   TITLE:=Qualcom SSDK switch driver
-  DEPENDS:=@(TARGET_ipq807x)
+  DEPENDS:=@(TARGET_qualcommax)
   FILES:=$(PKG_BUILD_DIR)/build/bin/qca-ssdk.ko
   AUTOLOAD:=$(call AutoLoad,30,qca-ssdk)
 endef
@@ -31,17 +31,11 @@ endef
 
 GCC_VERSION=$(shell echo "$(CONFIG_GCC_VERSION)" | sed 's/[^0-9.]*\([0-9.]*\).*/\1/')
 
-ifdef CONFIG_TOOLCHAIN_BIN_PATH
-TOOLCHAIN_BIN_PATH=$(CONFIG_TOOLCHAIN_BIN_PATH)
-else
-TOOLCHAIN_BIN_PATH=$(TOOLCHAIN_DIR)/bin
-endif
-
 LNX_CONFIG_OPTS = LNX_MAKEOPTS='$(KERNEL_MAKEOPTS)' MODULE_TYPE=KSLIB modules
 
 MAKE_FLAGS+= \
 	TARGET_NAME=$(CONFIG_TARGET_NAME) \
-	TOOL_PATH=$(TOOLCHAIN_BIN_PATH) \
+	TOOL_PATH=$(firstword $(TOOLCHAIN_BIN_DIRS)) \
 	SYS_PATH=$(LINUX_DIR) \
 	TOOLPREFIX=$(TARGET_CROSS) \
 	KVER=$(LINUX_VERSION) \
@@ -49,10 +43,13 @@ MAKE_FLAGS+= \
 	TARGET_SUFFIX=$(CONFIG_TARGET_SUFFIX) \
 	GCC_VERSION=$(GCC_VERSION) \
 	EXTRA_CFLAGS=-fno-stack-protector -I$(STAGING_DIR)/usr/include \
+	SoC=$(CONFIG_TARGET_SUBTARGET) \
+	PTP_FEATURE=disable SWCONFIG_FEATURE=disable \
+	ISISC_ENABLE=disable IN_QCA803X_PHY=FALSE \
 	$(LNX_CONFIG_OPTS)
 
-ifeq ($(CONFIG_TARGET_BOARD), "ipq807x")
-    MAKE_FLAGS+= CHIP_TYPE=HPPE PTP_FEATURE=disable SWCONFIG_FEATURE=disable
+ifeq ($(CONFIG_TARGET_SUBTARGET), "ipq807x")
+    MAKE_FLAGS+= CHIP_TYPE=HPPE
 endif
 
 define Build/InstallDev
@@ -74,6 +71,9 @@ define Build/InstallDev
 	fi
 	if [ -f $(PKG_BUILD_DIR)/include/init/ssdk_init.h ]; then \
 	$(CP) -rf $(PKG_BUILD_DIR)/include/init/ssdk_init.h $(1)/usr/include/qca-ssdk/init/; \
+	fi
+	if [ -f $(PKG_BUILD_DIR)/include/init/ssdk_netlink.h ]; then \
+	$(CP) -rf $(PKG_BUILD_DIR)/include/init/ssdk_netlink.h $(1)/usr/include/qca-ssdk/init/; \
 	fi
 	$(CP) -rf $(PKG_BUILD_DIR)/include/fal $(1)/usr/include/qca-ssdk
 	$(CP) -rf $(PKG_BUILD_DIR)/include/common/*.h $(1)/usr/include/qca-ssdk
