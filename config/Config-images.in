@@ -17,7 +17,7 @@ menu "Target Images"
 			default TARGET_INITRAMFS_COMPRESSION_LZMA if TARGET_lantiq
 			default TARGET_INITRAMFS_COMPRESSION_LZMA if TARGET_mpc85xx
 			default TARGET_INITRAMFS_COMPRESSION_LZMA if TARGET_ramips
-			default TARGET_INITRAMFS_COMPRESSION_ZSTD if TARGET_ipq807x
+			default TARGET_INITRAMFS_COMPRESSION_ZSTD if TARGET_qualcommax
 			default TARGET_INITRAMFS_COMPRESSION_XZ if USES_SEPARATE_INITRAMFS
 			default TARGET_INITRAMFS_COMPRESSION_NONE
 			depends on TARGET_ROOTFS_INITRAMFS
@@ -218,11 +218,6 @@ menu "Target Images"
 		depends on GRUB_IMAGES || GRUB_EFI_IMAGES
 		default y
 
-	config GRUB_SERIAL
-		string "Serial port device"
-		depends on GRUB_IMAGES || GRUB_EFI_IMAGES
-		default "ttyS0"
-
 	config GRUB_BAUDRATE
 		int "Serial port baud rate"
 		depends on GRUB_IMAGES || GRUB_EFI_IMAGES
@@ -231,7 +226,8 @@ menu "Target Images"
 
 	config GRUB_FLOWCONTROL
 		bool "Use RTE/CTS on serial console"
-		depends on GRUB_SERIAL != ""
+		depends on GRUB_IMAGES || GRUB_EFI_IMAGES
+		depends on TARGET_SERIAL != ""
 
 	config GRUB_BOOTOPTS
 		string "Extra kernel boot options"
@@ -276,6 +272,11 @@ menu "Target Images"
 		depends on TARGET_x86
 		depends on GRUB_IMAGES || GRUB_EFI_IMAGES
 		select PACKAGE_kmod-e1000
+
+	config TARGET_SERIAL
+		string "Serial port device"
+		depends on TARGET_x86 || TARGET_armsr
+		default "ttyS0"
 
 	config TARGET_IMAGES_GZIP
 		bool "GZip images"
