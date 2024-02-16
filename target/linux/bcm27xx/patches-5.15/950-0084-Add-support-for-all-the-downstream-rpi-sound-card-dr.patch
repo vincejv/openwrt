@@ -16844,6 +16844,17 @@ Signed-off-by: Joerg Schambacher <joerg@hifiberry.com>
 +		inv_dai_fmt |= SND_SOC_DAIFMT_CBM_CFM;
 +		break;
 +	}
- 	for_each_rtd_cpu_dais(rtd, i, cpu_dai) {
- 		unsigned int fmt = dai_fmt;
  
+ 	/*
+ 	 * For devices with more than one control interface, we assume the
+--- a/sound/usb/quirks.c
++++ b/sound/usb/quirks.c
+@@ -2087,6 +2087,8 @@ static const struct usb_audio_quirk_flag
+ 		   QUIRK_FLAG_FIXED_RATE),
+ 	DEVICE_FLG(0x0ecb, 0x2069, /* JBL Quantum810 Wireless */
+ 		   QUIRK_FLAG_FIXED_RATE),
++	DEVICE_FLG(0x09da, 0x2695, /* A4Tech FHD 1080p webcam */
++		   QUIRK_FLAG_DISABLE_AUTOSUSPEND | QUIRK_FLAG_GET_SAMPLE_RATE),
+ 	DEVICE_FLG(0x0fd9, 0x0008, /* Hauppauge HVR-950Q */
+ 		   QUIRK_FLAG_SHARE_MEDIA_DEVICE | QUIRK_FLAG_ALIGN_TRANSFER),
+ 	DEVICE_FLG(0x1224, 0x2a25, /* Jieli Technology USB PHY 2.0 */
