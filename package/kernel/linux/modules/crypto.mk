@@ -43,7 +43,8 @@ define KernelPackage/crypto-aead
 	CONFIG_CRYPTO_GENIV
   FILES:= \
 	  $(LINUX_DIR)/crypto/aead.ko \
-	  $(LINUX_DIR)/crypto/geniv.ko
+	  $(LINUX_DIR)/crypto/geniv.ko \
+    $(LINUX_DIR)/crypto/rng.ko
   AUTOLOAD:=$(call AutoLoad,09,aead,1)
   $(call AddDepends/crypto, +kmod-crypto-null)
 endef
