@@ -872,7 +872,7 @@ $(eval $(call KernelPackage,crypto-rmd160))
 
 define KernelPackage/crypto-rng
   TITLE:=CryptoAPI random number generation
-  DEPENDS:=+kmod-crypto-hash +kmod-crypto-hmac +kmod-crypto-sha512
+  DEPENDS:=+kmod-crypto-hash +kmod-crypto-hmac +kmod-crypto-sha512 +LINUX_6_6:kmod-crypto-sha3
   KCONFIG:= \
 	CONFIG_CRYPTO_DRBG \
 	CONFIG_CRYPTO_DRBG_HMAC=y \
@@ -958,6 +958,18 @@ ifdef KernelPackage/crypto-sha1/$(ARCH)
 endif
 
 $(eval $(call KernelPackage,crypto-sha1))
+
+
+define KernelPackage/crypto-sha3
+  TITLE:=SHA3 digest CryptoAPI module
+  DEPENDS:=+kmod-crypto-hash
+  KCONFIG:= CONFIG_CRYPTO_SHA3
+  FILES:=$(LINUX_DIR)/crypto/sha3_generic.ko
+  AUTOLOAD:=$(call AutoLoad,09,sha3_generic)
+  $(call AddDepends/crypto)
+endef
+
+$(eval $(call KernelPackage,crypto-sha3))
 
 
 define KernelPackage/crypto-sha256
