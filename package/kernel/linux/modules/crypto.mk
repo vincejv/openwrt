@@ -45,7 +45,7 @@ define KernelPackage/crypto-aead
 	  $(LINUX_DIR)/crypto/aead.ko \
 	  $(LINUX_DIR)/crypto/geniv.ko
   AUTOLOAD:=$(call AutoLoad,09,aead,1)
-  $(call AddDepends/crypto, +kmod-crypto-null)
+  $(call AddDepends/crypto, +kmod-crypto-null +kmod-crypto-rng)
 endef
 
 $(eval $(call KernelPackage,crypto-aead))
