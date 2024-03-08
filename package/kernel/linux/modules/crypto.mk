@@ -40,12 +40,12 @@ define KernelPackage/crypto-aead
   KCONFIG:= \
 	CONFIG_CRYPTO_AEAD \
 	CONFIG_CRYPTO_AEAD2 \
-	CONFIG_CRYPTO_GENIV
+	CONFIG_CRYPTO_GENIV@lt6.6
   FILES:= \
 	  $(LINUX_DIR)/crypto/aead.ko \
-	  $(LINUX_DIR)/crypto/geniv.ko
+	  $(LINUX_DIR)/crypto/geniv.ko@lt6.6
   AUTOLOAD:=$(call AutoLoad,09,aead,1)
-  $(call AddDepends/crypto, +kmod-crypto-null +kmod-crypto-rng)
+  $(call AddDepends/crypto, +kmod-crypto-null)
 endef
 
 $(eval $(call KernelPackage,crypto-aead))
@@ -231,7 +231,7 @@ $(eval $(call KernelPackage,crypto-ecdh))
 
 define KernelPackage/crypto-echainiv
   TITLE:=Encrypted Chain IV Generator
-  DEPENDS:=+kmod-crypto-aead
+  DEPENDS:=+kmod-crypto-aead +LINUX_6_6:kmod-crypto-geniv
   KCONFIG:=CONFIG_CRYPTO_ECHAINIV
   FILES:=$(LINUX_DIR)/crypto/echainiv.ko
   AUTOLOAD:=$(call AutoLoad,09,echainiv)
@@ -891,9 +891,22 @@ endef
 $(eval $(call KernelPackage,crypto-rng))
 
 
+define KernelPackage/crypto-geniv
+  TITLE:=CryptoAPI Shared IV generator
+  HIDDEN:=1
+  DEPENDS:=+kmod-crypto-rng +kmod-crypto-aead @LINUX_6_6
+  KCONFIG:=CONFIG_CRYPTO_GENIV
+  FILES:=$(LINUX_DIR)/crypto/geniv.ko
+  AUTOLOAD:=$(call AutoLoad,09,geniv)
+  $(call AddDepends/crypto)
+endef
+
+$(eval $(call KernelPackage,crypto-geniv))
+
+
 define KernelPackage/crypto-seqiv
   TITLE:=CryptoAPI Sequence Number IV Generator
-  DEPENDS:=+kmod-crypto-aead +kmod-crypto-rng
+  DEPENDS:=+kmod-crypto-aead +kmod-crypto-rng +LINUX_6_6:kmod-crypto-geniv
   KCONFIG:=CONFIG_CRYPTO_SEQIV
   FILES:=$(LINUX_DIR)/crypto/seqiv.ko
   AUTOLOAD:=$(call AutoLoad,09,seqiv)
@@ -910,6 +923,7 @@ define KernelPackage/crypto-sha1
 	CONFIG_CRYPTO_SHA1 \
 	CONFIG_CRYPTO_SHA1_ARM \
 	CONFIG_CRYPTO_SHA1_ARM_NEON \
+	CONFIG_CRYPTO_SHA1_ARM64_CE \
 	CONFIG_CRYPTO_SHA1_OCTEON \
 	CONFIG_CRYPTO_SHA1_PPC_SPE \
 	CONFIG_CRYPTO_SHA1_SSSE3
@@ -929,9 +943,15 @@ define KernelPackage/crypto-sha1/arm-neon
   AUTOLOAD+=$(call AutoLoad,09,sha1-arm-neon)
 endef
 
+define KernelPackage/crypto-sha1/aarch64-ce
+  FILES+=$(LINUX_DIR)/arch/arm64/crypto/sha1-ce.ko
+  AUTOLOAD+=$(call AutoLoad,09,sha1-ce)
+endef
+
 KernelPackage/crypto-sha1/imx=$(KernelPackage/crypto-sha1/arm-neon)
 KernelPackage/crypto-sha1/ipq40xx=$(KernelPackage/crypto-sha1/arm-neon)
 KernelPackage/crypto-sha1/mvebu/cortexa9=$(KernelPackage/crypto-sha1/arm-neon)
+KernelPackage/crypto-sha1/qualcommax=$(KernelPackage/crypto-sha1/aarch64-ce)
 
 define KernelPackage/crypto-sha1/octeon
   FILES+=$(LINUX_DIR)/arch/mips/cavium-octeon/crypto/octeon-sha1.ko
@@ -979,12 +999,25 @@ define KernelPackage/crypto-sha256
 	CONFIG_CRYPTO_SHA256 \
 	CONFIG_CRYPTO_SHA256_OCTEON \
 	CONFIG_CRYPTO_SHA256_PPC_SPE \
+	CONFIG_CRYPTO_SHA256_ARM64 \
+	CONFIG_CRYPTO_SHA2_ARM64_CE \
 	CONFIG_CRYPTO_SHA256_SSSE3
   FILES:= \
 	$(LINUX_DIR)/crypto/sha256_generic.ko \
 	$(LINUX_DIR)/lib/crypto/libsha256.ko
   AUTOLOAD:=$(call AutoLoad,09,sha256_generic)
   $(call AddDepends/crypto)
+endef
+
+define KernelPackage/crypto-sha256/aarch64
+  FILES+=$(LINUX_DIR)/arch/arm64/crypto/sha256-arm64.ko
+  AUTOLOAD+=$(call AutoLoad,09,sha256-arm64)
+endef
+
+define KernelPackage/crypto-sha256/aarch64-ce
+  $(call KernelPackage/crypto-sha256/aarch64)
+  FILES+=$(LINUX_DIR)/arch/arm64/crypto/sha2-ce.ko
+  AUTOLOAD+=$(call AutoLoad,09,sha2-ce)
 endef
 
 define KernelPackage/crypto-sha256/octeon
@@ -1004,6 +1037,8 @@ define KernelPackage/crypto-sha256/x86_64
 endef
 endif
 
+KernelPackage/crypto-sha256/qualcommax=$(KernelPackage/crypto-sha256/aarch64-ce)
+
 ifdef KernelPackage/crypto-sha256/$(ARCH)
   KernelPackage/crypto-sha256/$(CRYPTO_TARGET)=\
 	  $(KernelPackage/crypto-sha256/$(ARCH))
@@ -1018,6 +1053,7 @@ define KernelPackage/crypto-sha512
   KCONFIG:= \
 	CONFIG_CRYPTO_SHA512 \
 	CONFIG_CRYPTO_SHA512_ARM \
+	CONFIG_CRYPTO_SHA512_ARM64 \
 	CONFIG_CRYPTO_SHA512_OCTEON \
 	CONFIG_CRYPTO_SHA512_SSSE3
   FILES:=$(LINUX_DIR)/crypto/sha512_generic.ko
@@ -1028,6 +1064,11 @@ endef
 define KernelPackage/crypto-sha512/arm
   FILES+=$(LINUX_DIR)/arch/arm/crypto/sha512-arm.ko
   AUTOLOAD+=$(call AutoLoad,09,sha512-arm)
+endef
+
+define KernelPackage/crypto-sha512/aarch64
+  FILES+=$(LINUX_DIR)/arch/arm64/crypto/sha512-arm64.ko
+  AUTOLOAD+=$(call AutoLoad,09,sha512-arm64)
 endef
 
 KernelPackage/crypto-sha512/imx=$(KernelPackage/crypto-sha512/arm)
@@ -1100,4 +1141,3 @@ define KernelPackage/crypto-xts
 endef
 
 $(eval $(call KernelPackage,crypto-xts))
-
