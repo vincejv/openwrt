@@ -2162,6 +2162,7 @@ CONFIG_PACKAGE_kmod-crypto-echainiv=y
 CONFIG_PACKAGE_kmod-crypto-essiv=y
 CONFIG_PACKAGE_kmod-crypto-fcrypt=y
 CONFIG_PACKAGE_kmod-crypto-gcm=y
+CONFIG_PACKAGE_kmod-crypto-geniv=y
 CONFIG_PACKAGE_kmod-crypto-gf128=y
 CONFIG_PACKAGE_kmod-crypto-ghash=y
 CONFIG_PACKAGE_kmod-crypto-hash=y
@@ -2809,7 +2810,7 @@ CONFIG_PACKAGE_kmod-bluetooth-6lowpan=m
 CONFIG_PACKAGE_kmod-btmrvl=m
 CONFIG_PACKAGE_kmod-btsdio=m
 CONFIG_PACKAGE_kmod-button-hotplug=y
-CONFIG_PACKAGE_kmod-dma-buf=m
+CONFIG_PACKAGE_kmod-dma-buf=y
 CONFIG_PACKAGE_kmod-echo=m
 CONFIG_PACKAGE_kmod-eeprom-93cx6=m
 CONFIG_PACKAGE_kmod-eeprom-at24=m
@@ -2902,7 +2903,7 @@ CONFIG_PACKAGE_kmod-pcmcia-yenta=m
 # SPI Support
 #
 CONFIG_PACKAGE_kmod-mmc-spi=m
-CONFIG_PACKAGE_kmod-spi-bitbang=m
+CONFIG_PACKAGE_kmod-spi-bitbang=y
 CONFIG_PACKAGE_kmod-spi-dev=m
 CONFIG_PACKAGE_kmod-spi-gpio=m
 # end of SPI Support
@@ -3038,25 +3039,26 @@ CONFIG_PACKAGE_kmod-usbmon=m
 CONFIG_PACKAGE_kmod-acpi-video=m
 CONFIG_PACKAGE_kmod-backlight=m
 CONFIG_PACKAGE_kmod-backlight-pwm=m
-CONFIG_PACKAGE_kmod-drm=m
+CONFIG_PACKAGE_kmod-drm=y
 CONFIG_PACKAGE_kmod-drm-amdgpu=m
-CONFIG_PACKAGE_kmod-drm-buddy=m
-CONFIG_PACKAGE_kmod-drm-display-helper=m
-CONFIG_PACKAGE_kmod-drm-kms-helper=m
+CONFIG_PACKAGE_kmod-drm-buddy=y
+CONFIG_PACKAGE_kmod-drm-display-helper=y
+CONFIG_PACKAGE_kmod-drm-exec=y
+CONFIG_PACKAGE_kmod-drm-kms-helper=y
 CONFIG_PACKAGE_kmod-drm-radeon=m
-CONFIG_PACKAGE_kmod-drm-ttm=m
-CONFIG_PACKAGE_kmod-drm-ttm-helper=m
-CONFIG_PACKAGE_kmod-fb=m
-CONFIG_PACKAGE_kmod-fb-cfb-copyarea=m
-CONFIG_PACKAGE_kmod-fb-cfb-fillrect=m
-CONFIG_PACKAGE_kmod-fb-cfb-imgblt=m
-CONFIG_PACKAGE_kmod-fb-sys-fops=m
-CONFIG_PACKAGE_kmod-fb-sys-ram=m
-CONFIG_PACKAGE_kmod-fb-tft=m
+CONFIG_PACKAGE_kmod-drm-suballoc-helper=y
+CONFIG_PACKAGE_kmod-drm-ttm=y
+CONFIG_PACKAGE_kmod-drm-ttm-helper=y
+CONFIG_PACKAGE_kmod-fb=y
+CONFIG_PACKAGE_kmod-fb-cfb-copyarea=y
+CONFIG_PACKAGE_kmod-fb-cfb-fillrect=y
+CONFIG_PACKAGE_kmod-fb-cfb-imgblt=y
+CONFIG_PACKAGE_kmod-fb-sys-fops=y
+CONFIG_PACKAGE_kmod-fb-sys-ram=y
+CONFIG_PACKAGE_kmod-fb-tft=y
 CONFIG_PACKAGE_kmod-fb-tft-ili9486=m
-CONFIG_PACKAGE_kmod-video-core=m
-CONFIG_PACKAGE_kmod-v4l2loopback=m
-CONFIG_PACKAGE_kmod-video-cpia2=m
+CONFIG_PACKAGE_kmod-video-core=y
+CONFIG_PACKAGE_kmod-v4l2loopback=y
 CONFIG_PACKAGE_kmod-video-dma=m
 CONFIG_PACKAGE_kmod-video-gspca-core=m
 CONFIG_PACKAGE_kmod-video-gspca-conex=m
@@ -3095,8 +3097,8 @@ CONFIG_PACKAGE_kmod-video-gspca-vc032x=m
 CONFIG_PACKAGE_kmod-video-gspca-zc3xx=m
 CONFIG_PACKAGE_kmod-video-pwc=m
 CONFIG_PACKAGE_kmod-video-tw686x=m
-CONFIG_PACKAGE_kmod-video-uvc=m
-CONFIG_PACKAGE_kmod-video-videobuf2=m
+CONFIG_PACKAGE_kmod-video-uvc=y
+CONFIG_PACKAGE_kmod-video-videobuf2=y
 # end of Video Support
 
 #
@@ -4596,7 +4598,16 @@ CONFIG_PACKAGE_libdevmapper=y
 # CONFIG_PACKAGE_libdht is not set
 # CONFIG_PACKAGE_libdmapsharing is not set
 # CONFIG_PACKAGE_libdnet is not set
-# CONFIG_PACKAGE_libdrm is not set
+CONFIG_PACKAGE_libdrm=y
+
+#
+# Select libdrm build options
+#
+CONFIG_LIBDRM_INTEL=y
+CONFIG_LIBDRM_NOUVEAU=y
+CONFIG_LIBDRM_RADEON=y
+# end of Select libdrm build options
+
 CONFIG_PACKAGE_libdw=m
 CONFIG_PACKAGE_libe2p=y
 # CONFIG_PACKAGE_libecdsautil is not set
@@ -4771,7 +4782,7 @@ CONFIG_PACKAGE_libpcap=m
 # end of Configuration
 
 # CONFIG_PACKAGE_libpci is not set
-# CONFIG_PACKAGE_libpciaccess is not set
+CONFIG_PACKAGE_libpciaccess=y
 # CONFIG_PACKAGE_libpcre is not set
 # CONFIG_PACKAGE_libpcre16 is not set
 CONFIG_PACKAGE_libpcre2=m
