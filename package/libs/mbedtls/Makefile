@@ -70,6 +70,8 @@ MBEDTLS_BUILD_OPTS= \
   CONFIG_MBEDTLS_SELF_TEST \
   CONFIG_MBEDTLS_SSL_RENEGOTIATION \
   CONFIG_MBEDTLS_SSL_TRUNCATED_HMAC \
+  CONFIG_MBEDTLS_THREADING_C \
+  CONFIG_MBEDTLS_THREADING_PTHREAD \
   CONFIG_MBEDTLS_VERSION_C \
   CONFIG_MBEDTLS_VERSION_FEATURES
 
@@ -94,7 +96,7 @@ $(call Package/mbedtls/Default)
   CATEGORY:=Libraries
   SUBMENU:=SSL
   TITLE+= (library)
-  ABI_VERSION:=12
+  ABI_VERSION:=13
   MENU:=1
 endef
 
@@ -141,7 +143,10 @@ endef
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include
-	$(CP) $(PKG_INSTALL_DIR)/usr/include/mbedtls $(1)/usr/include/
+	$(CP) \
+		$(PKG_INSTALL_DIR)/usr/include/mbedtls \
+		$(PKG_INSTALL_DIR)/usr/include/psa \
+		$(1)/usr/include/
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/lib*.so* $(1)/usr/lib/
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/lib*.a $(1)/usr/lib/
