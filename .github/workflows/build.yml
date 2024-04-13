@@ -64,14 +64,14 @@ jobs:
       - name: Checkout OpenWrt
         uses: actions/checkout@v3
 
-      - name: Update feeds
-        run: |
-          ./scripts/feeds update -a
-          ./scripts/feeds install -a
+      # - name: Update feeds
+      #   run: |
+      #     ./scripts/feeds update -a
+      #     ./scripts/feeds install -a
 
-      - name: Remove failing packages
-        run: |
-          ./scripts/feeds uninstall libpfring
+      # - name: Remove failing packages
+      #   run: |
+      #     ./scripts/feeds uninstall libpfring
 
       - name: Generate configuration file
         run: make defconfig
