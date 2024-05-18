@@ -288,4 +288,3 @@
  
  /* Definitions of arguments for argp functions.  */
  static const struct argp_option options[] =
- 
