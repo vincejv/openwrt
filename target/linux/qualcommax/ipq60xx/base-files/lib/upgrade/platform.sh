@@ -33,7 +33,12 @@ EOF
 
 platform_do_upgrade() {
 	case "$(board_name)" in
-	netgear,wax214)
+	cambiumnetworks,xe3-4)
+		fw_setenv bootcount 0
+		nand_do_upgrade "$1"
+		;;
+	netgear,wax214|\
+	qihoo,360v6)
 		nand_do_upgrade "$1"
 		;;
 	yuncore,fap650)
