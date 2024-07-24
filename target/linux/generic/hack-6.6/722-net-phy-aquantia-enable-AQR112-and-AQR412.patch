@@ -15,9 +15,9 @@ Signed-off-by: Alex Marginean <alexandru.marginean@nxp.com>
 
 --- a/drivers/net/phy/aquantia/aquantia_main.c
 +++ b/drivers/net/phy/aquantia/aquantia_main.c
-@@ -127,6 +127,29 @@ struct aqr107_priv {
- 	u64 sgmii_stats[AQR107_SGMII_STAT_SZ];
- };
+@@ -90,6 +90,29 @@
+ #define AQR107_OP_IN_PROG_SLEEP		1000
+ #define AQR107_OP_IN_PROG_TIMEOUT	100000
  
 +/* registers in MDIO_MMD_VEND1 region */
 +#define AQUANTIA_VND1_GLOBAL_SC			0x000
@@ -45,7 +45,7 @@ Signed-off-by: Alex Marginean <alexandru.marginean@nxp.com>
  static int aqr107_get_sset_count(struct phy_device *phydev)
  {
  	return AQR107_SGMII_STAT_SZ;
-@@ -233,6 +256,51 @@ static int aqr_config_aneg(struct phy_de
+@@ -196,6 +219,51 @@ static int aqr_config_aneg(struct phy_de
  	return genphy_c45_check_and_restart_aneg(phydev, changed);
  }
  

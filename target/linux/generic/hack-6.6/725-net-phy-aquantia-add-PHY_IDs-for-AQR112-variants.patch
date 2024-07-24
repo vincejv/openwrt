@@ -24,7 +24,6 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 @@ -1023,6 +1025,30 @@ static struct phy_driver aqr_driver[] =
  	.led_hw_control_get = aqr_phy_led_hw_control_get,
  	.led_polarity_set = aqr_phy_led_polarity_set,
- #endif
  },
 +{
 +	PHY_ID_MATCH_MODEL(PHY_ID_AQR112C),

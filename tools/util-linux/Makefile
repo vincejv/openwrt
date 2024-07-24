@@ -14,6 +14,8 @@ PKG_SOURCE_URL:=@KERNEL/linux/utils/$(PKG_NAME)/v2.40
 PKG_HASH:=8e396eececae2b3b68db232c33b8810faa7c31f6df19f98f512739293d5829b7
 PKG_CPE_ID:=cpe:/a:kernel:util-linux
 
+PKG_FIXUP:=autoreconf
+
 HOST_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/host-build.mk
@@ -46,12 +48,8 @@ HOST_CONFIGURE_ARGS += \
 	--without-python \
 	--without-cryptsetup
 
-define Host/Install
-	$(INSTALL_BIN) $(HOST_BUILD_DIR)/hexdump $(STAGING_DIR_HOST)/bin/
-endef
-
 define Host/Uninstall
-	rm -f $(STAGING_DIR_HOST)/bin/hexdump
+	-$(call Host/Compile/Default,uninstall)
 endef
 
 $(eval $(call HostBuild))
