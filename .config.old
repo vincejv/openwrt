@@ -12,42 +12,32 @@ CONFIG_DEFAULT_TARGET_x86_64=y
 # CONFIG_TARGET_sunxi is not set
 # CONFIG_TARGET_apm821xx is not set
 # CONFIG_TARGET_armsr is not set
-# CONFIG_TARGET_ath79 is not set
 # CONFIG_TARGET_bcm27xx is not set
 # CONFIG_TARGET_bcm53xx is not set
-# CONFIG_TARGET_bcm47xx is not set
 # CONFIG_TARGET_bcm4908 is not set
-# CONFIG_TARGET_bmips is not set
 # CONFIG_TARGET_octeon is not set
 # CONFIG_TARGET_gemini is not set
-# CONFIG_TARGET_mpc85xx is not set
 # CONFIG_TARGET_mxs is not set
 # CONFIG_TARGET_ixp4xx is not set
 # CONFIG_TARGET_lantiq is not set
 # CONFIG_TARGET_loongarch64 is not set
 # CONFIG_TARGET_malta is not set
-# CONFIG_TARGET_pistachio is not set
 # CONFIG_TARGET_mvebu is not set
-# CONFIG_TARGET_kirkwood is not set
 # CONFIG_TARGET_mediatek is not set
 # CONFIG_TARGET_ramips is not set
 # CONFIG_TARGET_at91 is not set
 # CONFIG_TARGET_tegra is not set
-# CONFIG_TARGET_layerscape is not set
 # CONFIG_TARGET_qoriq is not set
-# CONFIG_TARGET_imx is not set
-# CONFIG_TARGET_octeontx is not set
 # CONFIG_TARGET_qualcommax is not set
 # CONFIG_TARGET_ipq40xx is not set
 # CONFIG_TARGET_ipq806x is not set
 # CONFIG_TARGET_realtek is not set
 # CONFIG_TARGET_rockchip is not set
 # CONFIG_TARGET_sifiveu is not set
+# CONFIG_TARGET_siflower is not set
 # CONFIG_TARGET_starfive is not set
-# CONFIG_TARGET_archs38 is not set
 # CONFIG_TARGET_omap is not set
 # CONFIG_TARGET_uml is not set
-# CONFIG_TARGET_zynq is not set
 CONFIG_TARGET_x86=y
 # CONFIG_TARGET_x86_generic is not set
 # CONFIG_TARGET_x86_legacy is not set
@@ -70,13 +60,11 @@ CONFIG_HAS_DEVICES=y
 CONFIG_TARGET_BOARD="x86"
 CONFIG_TARGET_SUBTARGET="64"
 CONFIG_TARGET_ARCH_PACKAGES="x86_64"
-CONFIG_DEFAULT_TARGET_OPTIMIZATION="-O2 -march=sandybridge -mtune=sandybridge -pipe"
+CONFIG_DEFAULT_TARGET_OPTIMIZATION="-O2 -pipe -march=skylake -mtune=skylake"
 CONFIG_CPU_TYPE=" "
 CONFIG_LINUX_6_6=y
 CONFIG_DEFAULT_base-files=y
 CONFIG_MODULE_DEFAULT_base-files=y
-CONFIG_DEFAULT_busybox=y
-CONFIG_MODULE_DEFAULT_busybox=y
 CONFIG_DEFAULT_ca-bundle=y
 CONFIG_MODULE_DEFAULT_ca-bundle=y
 CONFIG_DEFAULT_dnsmasq=y
@@ -128,18 +116,12 @@ CONFIG_DEFAULT_odhcp6c=y
 CONFIG_MODULE_DEFAULT_odhcp6c=y
 CONFIG_DEFAULT_odhcpd-ipv6only=y
 CONFIG_MODULE_DEFAULT_odhcpd-ipv6only=y
-CONFIG_DEFAULT_opkg=y
-CONFIG_MODULE_DEFAULT_opkg=y
 CONFIG_DEFAULT_partx-utils=y
 CONFIG_MODULE_DEFAULT_partx-utils=y
 CONFIG_DEFAULT_ppp=y
 CONFIG_MODULE_DEFAULT_ppp=y
 CONFIG_DEFAULT_ppp-mod-pppoe=y
 CONFIG_MODULE_DEFAULT_ppp-mod-pppoe=y
-CONFIG_DEFAULT_procd=y
-CONFIG_MODULE_DEFAULT_procd=y
-CONFIG_DEFAULT_procd-seccomp=y
-CONFIG_MODULE_DEFAULT_procd-seccomp=y
 CONFIG_DEFAULT_procd-ujail=y
 CONFIG_MODULE_DEFAULT_procd-ujail=y
 CONFIG_DEFAULT_uci=y
@@ -231,7 +213,7 @@ CONFIG_BUILDBOT=y
 CONFIG_SIGNED_PACKAGES=y
 CONFIG_SIGNATURE_CHECK=y
 CONFIG_DOWNLOAD_CHECK_CERTIFICATE=y
-# CONFIG_USE_APK is not set
+CONFIG_USE_APK=y
 
 #
 # General build options
@@ -359,6 +341,8 @@ CONFIG_KERNEL_IPV6_SEG6_LWTUNNEL=y
 # CONFIG_KERNEL_XDP_SOCKETS is not set
 CONFIG_KERNEL_PAGE_POOL=y
 # CONFIG_KERNEL_PAGE_POOL_STATS is not set
+CONFIG_KERNEL_MPTCP=y
+CONFIG_KERNEL_MPTCP_IPV6=y
 # CONFIG_KERNEL_IP_PNP is not set
 CONFIG_KERNEL_BTRFS_FS=y
 
@@ -459,7 +443,7 @@ CONFIG_BUILD_SUFFIX=""
 CONFIG_TARGET_ROOTFS_DIR=""
 CONFIG_CCACHE=y
 CONFIG_CCACHE_DIR=""
-CONFIG_KERNEL_CFLAGS="-O2 -march=sandybridge -mtune=sandybridge -pipe"
+CONFIG_KERNEL_CFLAGS="-O2 -march=skylake -mtune=skylake -pipe"
 CONFIG_EXTERNAL_KERNEL_TREE=""
 CONFIG_KERNEL_GIT_CLONE_URI=""
 # CONFIG_BUILD_LOG is not set
@@ -467,7 +451,7 @@ CONFIG_BUILD_LOG_DIR=""
 # CONFIG_SRC_TREE_OVERRIDE is not set
 CONFIG_EXTRA_OPTIMIZATION="-fno-caller-saves -fno-plt"
 # CONFIG_TARGET_OPTIONS is not set
-CONFIG_TARGET_OPTIMIZATION="-O2 -march=sandybridge -mtune=sandybridge -pipe"
+CONFIG_TARGET_OPTIMIZATION="-O2 -pipe -march=skylake -mtune=skylake"
 # CONFIG_BPF_TOOLCHAIN_NONE is not set
 # CONFIG_BPF_TOOLCHAIN_HOST is not set
 CONFIG_BPF_TOOLCHAIN_BUILD_LLVM=y
@@ -500,7 +484,7 @@ CONFIG_IMAGEOPT=y
 # CONFIG_PREINITOPT is not set
 CONFIG_TARGET_PREINIT_SUPPRESS_STDERR=y
 # CONFIG_TARGET_PREINIT_DISABLE_FAILSAFE is not set
-CONFIG_TARGET_PREINIT_TIMEOUT=2
+CONFIG_TARGET_PREINIT_TIMEOUT=4
 # CONFIG_TARGET_PREINIT_SHOW_NETMSG is not set
 # CONFIG_TARGET_PREINIT_SUPPRESS_FAILSAFE_NETMSG is not set
 CONFIG_TARGET_PREINIT_IFNAME=""
@@ -1143,7 +1127,7 @@ CONFIG_BUSYBOX_DEFAULT_PIVOT_ROOT=y
 # CONFIG_BUSYBOX_DEFAULT_FEATURE_SETPRIV_DUMP is not set
 # CONFIG_BUSYBOX_DEFAULT_FEATURE_SETPRIV_CAPABILITIES is not set
 # CONFIG_BUSYBOX_DEFAULT_FEATURE_SETPRIV_CAPABILITY_NAMES is not set
-# CONFIG_BUSYBOX_DEFAULT_SETSID is not set
+CONFIG_BUSYBOX_DEFAULT_SETSID=y
 CONFIG_BUSYBOX_DEFAULT_SWAPON=y
 CONFIG_BUSYBOX_DEFAULT_FEATURE_SWAPON_DISCARD=y
 CONFIG_BUSYBOX_DEFAULT_FEATURE_SWAPON_PRI=y
@@ -1623,8 +1607,6 @@ CONFIG_BUSYBOX_DEFAULT_FEATURE_SYSLOGD_READ_BUFFER_SIZE=0
 # CONFIG_BUSYBOX_DEFAULT_FEATURE_IPC_SYSLOG is not set
 CONFIG_BUSYBOX_DEFAULT_FEATURE_IPC_SYSLOG_BUFFER_SIZE=0
 # CONFIG_BUSYBOX_DEFAULT_FEATURE_KMSG_SYSLOG is not set
-# CONFIG_BUSYBOX_CONFIG_IP is not set
-# CONFIG_BUSYBOX_CONFIG_FEATURE_IP_LINK is not set
 # CONFIG_PACKAGE_busybox-selinux is not set
 CONFIG_PACKAGE_ca-bundle=y
 CONFIG_PACKAGE_ca-certificates=m
@@ -1815,6 +1797,7 @@ CONFIG_PACKAGE_ath11k-firmware-ipq6018=m
 # CONFIG_PACKAGE_ath11k-firmware-qcn9074 is not set
 # CONFIG_PACKAGE_ath11k-firmware-wcn6750 is not set
 # CONFIG_PACKAGE_ath11k-firmware-wcn6855 is not set
+CONFIG_PACKAGE_ath12k-firmware-wcn7850=m
 # CONFIG_PACKAGE_ath6k-firmware is not set
 CONFIG_PACKAGE_ath9k-htc-firmware=m
 CONFIG_PACKAGE_bnx2-firmware=y
@@ -1873,6 +1856,9 @@ CONFIG_PACKAGE_e100-firmware=m
 CONFIG_PACKAGE_edgeport-firmware=m
 # CONFIG_PACKAGE_eip197-mini-firmware is not set
 # CONFIG_PACKAGE_ibt-firmware is not set
+CONFIG_PACKAGE_intel-igpu-firmware-dmc=m
+CONFIG_PACKAGE_intel-igpu-firmware-guc=m
+CONFIG_PACKAGE_intel-igpu-firmware-huc=m
 CONFIG_PACKAGE_intel-microcode=m
 # CONFIG_PACKAGE_iwl3945-firmware is not set
 # CONFIG_PACKAGE_iwl4965-firmware is not set
@@ -1906,6 +1892,9 @@ CONFIG_PACKAGE_iwlwifi-firmware-be200=m
 # CONFIG_PACKAGE_libertas-spi-firmware is not set
 # CONFIG_PACKAGE_libertas-usb-firmware is not set
 CONFIG_PACKAGE_mlxsw_spectrum-firmware=m
+CONFIG_PACKAGE_mlxsw_spectrum2-firmware=m
+CONFIG_PACKAGE_mlxsw_spectrum3-firmware=m
+CONFIG_PACKAGE_mlxsw_spectrum4-firmware=m
 CONFIG_PACKAGE_mt7601u-firmware=m
 # CONFIG_PACKAGE_mt7622bt-firmware is not set
 # CONFIG_PACKAGE_mt7921bt-firmware is not set
@@ -1913,9 +1902,11 @@ CONFIG_PACKAGE_mt7601u-firmware=m
 # CONFIG_PACKAGE_mt7981-wo-firmware is not set
 # CONFIG_PACKAGE_mt7986-wo-firmware is not set
 CONFIG_PACKAGE_mt7988-2p5g-phy-firmware=m
+CONFIG_PACKAGE_mt7988-wo-firmware=m
 CONFIG_PACKAGE_mwifiex-pcie-firmware=m
 CONFIG_PACKAGE_mwifiex-sdio-firmware=m
 CONFIG_PACKAGE_mwl8k-firmware=m
+CONFIG_PACKAGE_omnia-mcu-firmware=m
 # CONFIG_PACKAGE_p54-pci-firmware is not set
 # CONFIG_PACKAGE_p54-spi-firmware is not set
 # CONFIG_PACKAGE_p54-usb-firmware is not set
@@ -1925,13 +1916,14 @@ CONFIG_PACKAGE_radeon-firmware=m
 CONFIG_PACKAGE_rs9113-firmware=m
 CONFIG_PACKAGE_rt2800-pci-firmware=m
 CONFIG_PACKAGE_rt2800-usb-firmware=m
-# CONFIG_PACKAGE_rt61-pci-firmware is not set
-# CONFIG_PACKAGE_rt73-usb-firmware is not set
+CONFIG_PACKAGE_rt61-pci-firmware=m
+CONFIG_PACKAGE_rt73-usb-firmware=m
 # CONFIG_PACKAGE_rtl8188eu-firmware is not set
 CONFIG_PACKAGE_rtl8188fu-firmware=m
 CONFIG_PACKAGE_rtl8192ce-firmware=m
 CONFIG_PACKAGE_rtl8192cu-firmware=m
 CONFIG_PACKAGE_rtl8192de-firmware=m
+CONFIG_PACKAGE_rtl8192du-firmware=m
 # CONFIG_PACKAGE_rtl8192eu-firmware is not set
 CONFIG_PACKAGE_rtl8192se-firmware=m
 # CONFIG_PACKAGE_rtl8723au-firmware is not set
@@ -1949,6 +1941,7 @@ CONFIG_PACKAGE_rtl8851be-firmware=m
 CONFIG_PACKAGE_rtl8852ae-firmware=m
 CONFIG_PACKAGE_rtl8852be-firmware=m
 CONFIG_PACKAGE_rtl8852ce-firmware=m
+CONFIG_PACKAGE_rtl8922ae-firmware=m
 # CONFIG_PACKAGE_ti-3410-firmware is not set
 # CONFIG_PACKAGE_ti-5052-firmware is not set
 CONFIG_PACKAGE_wil6210-firmware=m
@@ -2014,6 +2007,7 @@ CONFIG_PACKAGE_kmod-can-slcan=m
 CONFIG_PACKAGE_kmod-can-usb-8dev=m
 CONFIG_PACKAGE_kmod-can-usb-ems=m
 CONFIG_PACKAGE_kmod-can-usb-esd=m
+CONFIG_PACKAGE_kmod-can-usb-gs=m
 CONFIG_PACKAGE_kmod-can-usb-kvaser=m
 CONFIG_PACKAGE_kmod-can-usb-peak=m
 CONFIG_PACKAGE_kmod-can-vcan=m
@@ -2446,6 +2440,7 @@ CONFIG_PACKAGE_kmod-nft-xfrm=y
 CONFIG_PACKAGE_kmod-3c59x=m
 CONFIG_PACKAGE_kmod-8139cp=m
 CONFIG_PACKAGE_kmod-8139too=m
+CONFIG_PACKAGE_kmod-ag71xx=m
 CONFIG_PACKAGE_kmod-alx=m
 CONFIG_PACKAGE_kmod-amazon-ena=y
 CONFIG_PACKAGE_kmod-amd-xgbe=y
@@ -2459,7 +2454,11 @@ CONFIG_PACKAGE_kmod-be2net=m
 CONFIG_PACKAGE_kmod-bnx2=y
 CONFIG_PACKAGE_kmod-bnx2x=m
 CONFIG_PACKAGE_kmod-dm9000=m
+CONFIG_PACKAGE_kmod-dsa=m
+CONFIG_PACKAGE_kmod-dsa-b53=m
+CONFIG_PACKAGE_kmod-dsa-b53-mdio=m
 CONFIG_PACKAGE_kmod-dsa-mv88e6xxx=m
+CONFIG_PACKAGE_kmod-dsa-qca8k=m
 CONFIG_PACKAGE_kmod-dsa-tag-dsa=m
 CONFIG_PACKAGE_kmod-dummy=m
 CONFIG_PACKAGE_kmod-dwmac-intel=m
@@ -2508,19 +2507,32 @@ CONFIG_PACKAGE_kmod-pcs-xpcs=y
 CONFIG_PACKAGE_kmod-phy-airoha-en8811h=m
 CONFIG_PACKAGE_kmod-phy-amd=m
 CONFIG_PACKAGE_kmod-phy-aquantia=m
+CONFIG_PACKAGE_kmod-phy-at803x=m
 CONFIG_PACKAGE_kmod-phy-ax88796b=m
 CONFIG_PACKAGE_kmod-phy-bcm84881=m
 CONFIG_PACKAGE_kmod-phy-broadcom=m
+CONFIG_PACKAGE_kmod-phy-intel-xway=m
 CONFIG_PACKAGE_kmod-phy-marvell=m
 CONFIG_PACKAGE_kmod-phy-marvell-10g=m
+CONFIG_PACKAGE_kmod-phy-micrel=m
 CONFIG_PACKAGE_kmod-phy-microchip=m
+CONFIG_PACKAGE_kmod-phy-qca83xx=m
 CONFIG_PACKAGE_kmod-phy-realtek=y
 CONFIG_PACKAGE_kmod-phy-smsc=m
+CONFIG_PACKAGE_kmod-phy-vitesse=m
 CONFIG_PACKAGE_kmod-phylib-broadcom=m
+CONFIG_PACKAGE_kmod-phylib-qcom=m
 CONFIG_PACKAGE_kmod-phylink=y
 CONFIG_PACKAGE_kmod-qlcnic=m
 CONFIG_PACKAGE_kmod-r6040=m
+CONFIG_PACKAGE_kmod-r8101=m
+CONFIG_PACKAGE_kmod-r8125=m
+CONFIG_PACKAGE_kmod-r8125-rss=m
+CONFIG_PACKAGE_kmod-r8126=m
+CONFIG_PACKAGE_kmod-r8126-rss=m
+CONFIG_PACKAGE_kmod-r8168=m
 CONFIG_PACKAGE_kmod-r8169=y
+CONFIG_PACKAGE_kmod-rmnet=m
 CONFIG_PACKAGE_kmod-sfc=m
 CONFIG_PACKAGE_kmod-sfc-falcon=m
 CONFIG_PACKAGE_kmod-sfp=m
@@ -2533,8 +2545,6 @@ CONFIG_PACKAGE_kmod-spi-ks8995=m
 CONFIG_PACKAGE_kmod-stmmac-core=m
 CONFIG_PACKAGE_kmod-swconfig=m
 CONFIG_PACKAGE_kmod-switch-ar8xxx=m
-CONFIG_PACKAGE_kmod-switch-bcm53xx=m
-CONFIG_PACKAGE_kmod-switch-bcm53xx-mdio=m
 CONFIG_PACKAGE_kmod-switch-ip17xx=m
 CONFIG_PACKAGE_kmod-switch-rtl8306=m
 CONFIG_PACKAGE_kmod-switch-rtl8366-smi=m
@@ -2567,6 +2577,7 @@ CONFIG_PACKAGE_kmod-geneve=m
 CONFIG_PACKAGE_kmod-gre=m
 CONFIG_PACKAGE_kmod-gre6=m
 CONFIG_PACKAGE_kmod-inet-diag=m
+CONFIG_PACKAGE_kmod-inet-mptcp-diag=m
 CONFIG_PACKAGE_kmod-ip-vti=m
 CONFIG_PACKAGE_kmod-ip6-tunnel=m
 CONFIG_PACKAGE_kmod-ip6-vti=m
@@ -2897,8 +2908,11 @@ CONFIG_PACKAGE_kmod-drm=y
 CONFIG_PACKAGE_kmod-drm-amdgpu=m
 CONFIG_PACKAGE_kmod-drm-buddy=y
 CONFIG_PACKAGE_kmod-drm-display-helper=y
+CONFIG_PACKAGE_kmod-drm-dma-helper=m
 CONFIG_PACKAGE_kmod-drm-exec=m
 CONFIG_PACKAGE_kmod-drm-kms-helper=y
+CONFIG_PACKAGE_kmod-drm-mipi-dbi=m
+CONFIG_PACKAGE_kmod-drm-panel-mipi-dbi=m
 CONFIG_PACKAGE_kmod-drm-radeon=m
 CONFIG_PACKAGE_kmod-drm-suballoc-helper=m
 CONFIG_PACKAGE_kmod-drm-ttm=y
@@ -2912,6 +2926,7 @@ CONFIG_PACKAGE_kmod-fb-sys-ram=y
 CONFIG_PACKAGE_kmod-fb-tft=y
 CONFIG_PACKAGE_kmod-fb-tft-ili9486=m
 CONFIG_PACKAGE_kmod-video-core=y
+CONFIG_PACKAGE_kmod-video-cpia2=m
 CONFIG_PACKAGE_kmod-video-dma-contig=m
 CONFIG_PACKAGE_kmod-video-dma-sg=m
 CONFIG_PACKAGE_kmod-video-gspca-core=m
@@ -3021,6 +3036,7 @@ CONFIG_PACKAGE_kmod-ath10k-smallbuffers=m
 CONFIG_PACKAGE_kmod-ath11k=m
 # CONFIG_ATH11K_THERMAL is not set
 CONFIG_PACKAGE_kmod-ath11k-pci=m
+CONFIG_PACKAGE_kmod-ath12k=m
 CONFIG_PACKAGE_kmod-ath5k=m
 CONFIG_PACKAGE_kmod-ath6kl=m
 CONFIG_PACKAGE_kmod-ath6kl-sdio=m
@@ -3105,16 +3121,22 @@ CONFIG_PACKAGE_kmod-mt7921s=m
 CONFIG_PACKAGE_kmod-mt7921u=m
 CONFIG_PACKAGE_kmod-mt7922-firmware=m
 CONFIG_PACKAGE_kmod-mt7925-common=m
+CONFIG_PACKAGE_kmod-mt7925-firmware=m
 CONFIG_PACKAGE_kmod-mt7925e=m
 CONFIG_PACKAGE_kmod-mt7925u=m
 CONFIG_PACKAGE_kmod-mt792x-common=m
 CONFIG_PACKAGE_kmod-mt792x-usb=m
+CONFIG_PACKAGE_kmod-mt7992-23-firmware=m
+CONFIG_PACKAGE_kmod-mt7992-firmware=m
+CONFIG_PACKAGE_kmod-mt7996-233-firmware=m
 CONFIG_PACKAGE_kmod-mt7996-firmware=m
+CONFIG_PACKAGE_kmod-mt7996-firmware-common=m
 CONFIG_PACKAGE_kmod-mt7996e=m
 CONFIG_PACKAGE_kmod-mwifiex-pcie=m
 CONFIG_PACKAGE_kmod-mwifiex-sdio=m
 CONFIG_PACKAGE_kmod-mwl8k=m
 CONFIG_PACKAGE_kmod-owl-loader=m
+CONFIG_PACKAGE_kmod-qcom-qmi-helpers=m
 CONFIG_PACKAGE_kmod-rsi91x=m
 CONFIG_PACKAGE_kmod-rsi91x-sdio=m
 CONFIG_PACKAGE_kmod-rsi91x-usb=m
@@ -3128,10 +3150,14 @@ CONFIG_PACKAGE_kmod-rt2x00-lib=m
 CONFIG_PACKAGE_kmod-rt2x00-mmio=m
 CONFIG_PACKAGE_kmod-rt2x00-pci=m
 CONFIG_PACKAGE_kmod-rt2x00-usb=m
+CONFIG_PACKAGE_kmod-rt61-pci=m
+CONFIG_PACKAGE_kmod-rt73-usb=m
 CONFIG_PACKAGE_kmod-rtl8192c-common=m
 CONFIG_PACKAGE_kmod-rtl8192ce=m
 CONFIG_PACKAGE_kmod-rtl8192cu=m
+CONFIG_PACKAGE_kmod-rtl8192d-common=m
 CONFIG_PACKAGE_kmod-rtl8192de=m
+CONFIG_PACKAGE_kmod-rtl8192du=m
 CONFIG_PACKAGE_kmod-rtl8192se=m
 CONFIG_PACKAGE_kmod-rtl8723-common=m
 CONFIG_PACKAGE_kmod-rtl8723be=m
@@ -3149,6 +3175,9 @@ CONFIG_PACKAGE_kmod-rtw88=m
 # CONFIG_PACKAGE_RTW88_DEBUGFS is not set
 CONFIG_PACKAGE_kmod-rtw88-8723d=m
 CONFIG_PACKAGE_kmod-rtw88-8723de=m
+CONFIG_PACKAGE_kmod-rtw88-8723ds=m
+CONFIG_PACKAGE_kmod-rtw88-8723du=m
+CONFIG_PACKAGE_kmod-rtw88-8723x=m
 CONFIG_PACKAGE_kmod-rtw88-8821c=m
 CONFIG_PACKAGE_kmod-rtw88-8821ce=m
 CONFIG_PACKAGE_kmod-rtw88-8821cu=m
@@ -3159,7 +3188,19 @@ CONFIG_PACKAGE_kmod-rtw88-8822c=m
 CONFIG_PACKAGE_kmod-rtw88-8822ce=m
 CONFIG_PACKAGE_kmod-rtw88-8822cu=m
 CONFIG_PACKAGE_kmod-rtw88-pci=m
+CONFIG_PACKAGE_kmod-rtw88-sdio=m
 CONFIG_PACKAGE_kmod-rtw88-usb=m
+CONFIG_PACKAGE_kmod-rtw89=m
+# CONFIG_PACKAGE_RTW89_DEBUG is not set
+# CONFIG_PACKAGE_RTW89_DEBUGFS is not set
+# CONFIG_PACKAGE_RTW89_DEBUGMSG is not set
+CONFIG_PACKAGE_kmod-rtw89-8851be=m
+CONFIG_PACKAGE_kmod-rtw89-8852ae=m
+CONFIG_PACKAGE_kmod-rtw89-8852b-common=m
+CONFIG_PACKAGE_kmod-rtw89-8852be=m
+CONFIG_PACKAGE_kmod-rtw89-8852ce=m
+CONFIG_PACKAGE_kmod-rtw89-8922ae=m
+CONFIG_PACKAGE_kmod-rtw89-pci=m
 CONFIG_PACKAGE_kmod-wil6210=m
 CONFIG_PACKAGE_kmod-wl12xx=m
 CONFIG_PACKAGE_kmod-wl18xx=m
@@ -3706,6 +3747,7 @@ CONFIG_WPA_MSG_MIN_PRIORITY=3
 # CONFIG_WPA_WOLFSSL is not set
 CONFIG_DRIVER_11AC_SUPPORT=y
 CONFIG_DRIVER_11AX_SUPPORT=y
+CONFIG_DRIVER_11BE_SUPPORT=y
 # CONFIG_WPA_ENABLE_WEP is not set
 CONFIG_WPA_MBO_SUPPORT=y
 # CONFIG_PACKAGE_wpa-supplicant-basic is not set
@@ -3960,6 +4002,7 @@ CONFIG_PACKAGE_more=m
 CONFIG_PACKAGE_mount-utils=m
 # CONFIG_PACKAGE_namei is not set
 CONFIG_PACKAGE_nsenter=m
+CONFIG_PACKAGE_omnia-mcutool=m
 CONFIG_PACKAGE_openssl-util=m
 # CONFIG_PACKAGE_policycoreutils is not set
 # CONFIG_PACKAGE_prlimit is not set
