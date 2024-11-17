@@ -64,6 +64,13 @@ jobs:
       - name: Checkout OpenWrt
         uses: actions/checkout@v3
 
+      - name: Cache OpenWrt buld
+        uses: klever1988/cachewrtbuild@main
+        with:
+          ccache: 'true'
+          mixkey: 'x86_64_skylake'
+          prefix: 'openwrt'
+
       # - name: Update feeds
       #   run: |
       #     ./scripts/feeds update -a
