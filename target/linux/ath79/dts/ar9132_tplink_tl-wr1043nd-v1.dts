@@ -124,6 +124,16 @@
 				label = "art";
 				reg = <0x7F0000 0x010000>;
 				read-only;
+
+				nvmem-layout {
+					compatible = "fixed-layout";
+					#address-cells = <1>;
+					#size-cells = <1>;
+
+					cal_art_1000: calibration@1000 {
+						reg = <0x1000 0xeb8>;
+					};
+				};
 			};
 		};
 	};
