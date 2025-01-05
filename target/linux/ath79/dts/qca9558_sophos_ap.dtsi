@@ -186,7 +186,3 @@
 
 	mtd-cal-data = <&art 0x1000>;
 };
-
-&usb0 {
-	vbus-supply = <&reg_usb_vbus>;
-};
