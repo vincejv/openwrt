@@ -221,7 +221,7 @@ LINUX_RECONF_DIFF = $(SCRIPT_DIR)/kconfig.pl - '>' $(call __linux_confcmd,$(filt
 ifeq ($(DUMP),1)
   BuildTarget=$(BuildTargets/DumpCurrent)
 
-  CPU_CFLAGS = -O2 -march=sandybridge -mtune=sandybridge -pipe
+  CPU_CFLAGS = -O2 -march=skylake -mtune=skylake -pipe
   ifneq ($(findstring mips,$(ARCH)),)
     ifneq ($(findstring mips64,$(ARCH)),)
       CPU_TYPE ?= mips64
